@@ -15,6 +15,7 @@ const Student = db.define('student', {
     allowNull: false,
     validate: {
       isEmail: true,
+      unique: true
     },
   },
 });
@@ -24,6 +25,8 @@ Student.beforeCreate((student) => {
   const nameLast = student.lastName;
 
   student.firstName = nameFirst[0].toUpperCase() + nameFirst.slice(1);
+  // christian -> C/ hristian
+  // CHristian -> C/ Hristian
   student.lastName = nameLast[0].toUpperCase() + nameLast.slice(1);
 });
 
